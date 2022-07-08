@@ -9,40 +9,56 @@ function getWords(string) {
     for (let i = 0; i < string.length; i++) {
         let char = string.charAt(i);
         let asciiCode = char.charCodeAt(0);
-        if(97 <= asciiCode &&  asciiCode <= 122) {
+        if(97 <= asciiCode && asciiCode <= 122) {
             word = word.concat(char);
         } else if (65 <= asciiCode && asciiCode <= 90) {
             let c = String.fromCharCode(asciiCode + 32);
             word = word.concat(c);
         } else if (asciiCode == 32) {     
             words[w] = word;
-            console.log("hey -> " + word);
+            //console.log("hey -> " + word);
             word = "";
             w++;
         }
+    }
+
+    if (word != "") {
+        words[w] = word;
     }
     return words;
 }
 // function of endpointA
 function areAnagrams(string1, string2) {
-    const asciiCount = new Array(256).fill(0);
-
     if(string1.length != string2.length){
         return false;
     }
     // Convert both strings to lowercase as ASCII code for 'l' is different from 'L'
     string1 = string1.toLowerCase();
     string2 = string2.toLowerCase();
-    // Iterate through strings adding 1 to the coresponding ASCI character for String1 while substracting 1 for String2 
+    // Add all chars of string1 in a hashset
+    const str1Chars = new Map();
     for (let i = 0; i < string1.length; i++) {
-        asciiCount[string1.charAt(i).charCodeAt(0)]+= 1;
-        asciiCount[string2.charAt(i).charCodeAt(0)]-= 1;
-    }
-    // See if we encountered the same characters
-    for (let i = 0; i < asciiCount.length; i++) {
-        if (asciiCount[i] != 0) { // Each ascii count should be zero if string1 is anagram of string2
-            return false;
+        let str1Char = string1.charAt(i);
+        let str1Char2 = string2.charAt(i);
+        if(str1Chars.has(str1Char)){
+            let count = str1Chars.get(str1Char);
+            str1Chars.set(str1Char, count+1);
+        } else {
+            str1Chars.set(str1Char, 1);
         }
+        if(str1Chars.has(str1Char2)){
+            let count = str1Chars.get(str1Char2);
+            str1Chars.set(str1Char2, count-1);
+        } else {
+            str1Chars.set(str1Char2, -1);
+        }
+    }
+    // Check if the characters of string2 exist in the hashet removing each time the char found
+    for (let i = 0; i < string1.length; i++) {
+        let str1Char = string1.charAt(i);
+        if (str1Chars.get(str1Char) != 0) {
+            return false;
+        } 
     }
     return true;
 }
@@ -82,7 +98,7 @@ function getAnagramGroups(sentence) {
             }
         }
         if (uniqueAnagrams.size != 0) {     // If we found anagrams of words[i] also include words[i] in the result if not already
-            if (!uniqueAnagrams.has(firstWord)) {
+            if (!uniqueAnagrams.has(words[i])) {
                 group[g] = words[i];
             }
             
