@@ -79,35 +79,77 @@ function getAnagrams(word, sentence) {
     }
     return anagrams;
 }
+// // function of endpointC
+// function getAnagramGroups(sentence) {
+//     var groupAnagrams = [];
+//     var words = getWords(sentence);        // Break the string in to an array of words
+//     var w = 0;
+//     for (let i = 0; i < words.length; i++) {
+//         const uniqueAnagrams = new Set();   // Set with O(1) look up to check for unique anagrams in the sentence
+//         const group = [];
+//         var g = 0;
+//         for (let j = i+1; j < words.length; j++) {
+//             if (areAnagrams(words[i], words[j])) {
+//                 if (!uniqueAnagrams.has(words[j])) {
+//                     uniqueAnagrams.add(words[j]);
+//                     group[g] = words[j];
+//                     g++;
+//                 }
+//             }
+//         }
+//         if (uniqueAnagrams.size != 0) {     // If we found anagrams of words[i] also include words[i] in the result if not already
+//             if (!uniqueAnagrams.has(words[i])) {
+//                 group[g] = words[i];
+//             }
+            
+//             if(group.length > 1) {          // If we found anagrams of words[i] add the group to the final array of groups
+//                 groupAnagrams[w] = group;
+//                 w++;
+//             }
+//         }
+//     }
+//     return groupAnagrams;
+// }
+
 // function of endpointC
 function getAnagramGroups(sentence) {
-    var groupAnagrams = [];
+    const groupAnagrams = [];
+    let g = 0;
+    const wordArrays = new Map();
     var words = getWords(sentence);        // Break the string in to an array of words
-    var w = 0;
     for (let i = 0; i < words.length; i++) {
-        const uniqueAnagrams = new Set();   // Set with O(1) look up to check for unique anagrams in the sentence
-        const group = [];
-        var g = 0;
-        for (let j = i+1; j < words.length; j++) {
-            if (areAnagrams(words[i], words[j])) {
-                if (!uniqueAnagrams.has(words[j])) {
-                    uniqueAnagrams.add(words[j]);
-                    group[g] = words[j];
-                    g++;
-                }
-            }
+        const chars26 = new Array(26).fill(0);
+        for (let j = 0; j < words[i].length; j++) {
+            let char = words[i].charAt(j);
+            let code = char.charCodeAt(0) % 97;
+            chars26[code] += 1;
         }
-        if (uniqueAnagrams.size != 0) {     // If we found anagrams of words[i] also include words[i] in the result if not already
-            if (!uniqueAnagrams.has(words[i])) {
-                group[g] = words[i];
-            }
-            
-            if(group.length > 1) {          // If we found anagrams of words[i] add the group to the final array of groups
-                groupAnagrams[w] = group;
-                w++;
-            }
+        let setWords = new Set();
+        if (wordArrays.has(chars26.toString())) {
+            setWords = wordArrays.get(chars26.toString());
         }
+        setWords.add(words[i]);
+        wordArrays.set(chars26.toString(), setWords);
+        console.log(setWords);
     }
+
+    wordArrays.forEach((setWords, key) => {
+       if(setWords.size > 1) {
+            const uniqueAnagrams = new Set();
+            const group = []
+            let w = 0;
+            setWords.forEach((word) => {
+                if (!uniqueAnagrams.has(word)) {
+                    uniqueAnagrams.add(word);
+                    group[w] = word;
+                    w++
+                }
+            });
+            groupAnagrams[g] = group;
+            g++
+       } 
+    });
+
     return groupAnagrams;
 }
 
