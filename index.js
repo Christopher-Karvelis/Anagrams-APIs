@@ -1,6 +1,6 @@
 import express from "express"
 import bodyParser from "body-parser"
-import anagramsRouter from "./routes/anagrams.js"
+import anagramsRouter from "./routes/endpoints.js"
 
 const app = express()
 
