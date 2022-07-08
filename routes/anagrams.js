@@ -2,6 +2,28 @@ import express from "express"
 
 const router = express.Router()
 
+function getWords(string) {
+    let word = "";
+    const words = [];
+    var w = 0;
+    for (let i = 0; i < string.length; i++) {
+        let char = string.charAt(i);
+        let asciiCode = char.charCodeAt(0);
+        if(97 <= asciiCode &&  asciiCode <= 122) {
+            word = word.concat(char);
+        } else if (65 <= asciiCode && asciiCode <= 90) {
+            let c = String.fromCharCode(asciiCode + 32);
+            word = word.concat(c);
+        } else if (asciiCode == 32) {     
+            words[w] = word;
+            console.log("hey -> " + word);
+            word = "";
+            w++;
+        }
+    }
+    return words;
+}
+// function of endpointA
 function areAnagrams(string1, string2) {
     const asciiCount = new Array(256).fill(0);
 
@@ -24,11 +46,11 @@ function areAnagrams(string1, string2) {
     }
     return true;
 }
-
+// function of endpointB
 function getAnagrams(word, sentence) {
     var anagrams = [];
     const uniqueAnagrams = new Set();   // Set with O(1) look up to check for unique anagrams in the sentence
-    var words = sentence.split(' ');    // Break the string in to an array of words
+    var words = getWords(sentence);    // Break the string in to an array of words
     var j = 0;
     for (let i = 0; i < words.length; i++) {
         if(areAnagrams(word, words[i])){
@@ -41,14 +63,13 @@ function getAnagrams(word, sentence) {
     }
     return anagrams;
 }
-
+// function of endpointC
 function getAnagramGroups(sentence) {
     var groupAnagrams = [];
-    var words = sentence.split(' ');    // Break the string in to an array of words
+    var words = getWords(sentence);        // Break the string in to an array of words
     var w = 0;
     for (let i = 0; i < words.length; i++) {
         const uniqueAnagrams = new Set();   // Set with O(1) look up to check for unique anagrams in the sentence
-        const firstWord = words[i];
         const group = [];
         var g = 0;
         for (let j = i+1; j < words.length; j++) {
@@ -60,12 +81,12 @@ function getAnagramGroups(sentence) {
                 }
             }
         }
-        if (uniqueAnagrams.size != 0) {
+        if (uniqueAnagrams.size != 0) {     // If we found anagrams of words[i] also include words[i] in the result if not already
             if (!uniqueAnagrams.has(firstWord)) {
-                group[g] = firstWord;
+                group[g] = words[i];
             }
             
-            if(group.length > 1) {
+            if(group.length > 1) {          // If we found anagrams of words[i] add the group to the final array of groups
                 groupAnagrams[w] = group;
                 w++;
             }
