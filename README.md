@@ -25,7 +25,7 @@
   - Open postman using Chrome (Brave and Opera have issues)
   - Create a workspace and click on the "+" icon as shown below:
     
-    [1](https://user-images.githubusercontent.com/25777650/178104808-8929781d-8114-4014-b3e1-09cdfb4b283f.png)
+    ![1](https://user-images.githubusercontent.com/25777650/178104808-8929781d-8114-4014-b3e1-09cdfb4b283f.png)
 
   
 ### Testing endpoint A
