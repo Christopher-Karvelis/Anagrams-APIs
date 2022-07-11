@@ -68,7 +68,7 @@
 ### Testing endpoint C
   Endpoint C identifies and returns all anagram groups present in the string1. So in order to test it:
 
-   - Create a new POST request to "localhost:8080/B" (LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/B" (ON HEROKU).
+   - Create a new POST request to "localhost:8080/C" (LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/C" (ON HEROKU).
    - Click on "body" and select "JSON" from the dropdown menu.
    - Add to the body one sentence with key "string1" as shown below and click "Send".
    - You can check the outcome in the body of the response.
