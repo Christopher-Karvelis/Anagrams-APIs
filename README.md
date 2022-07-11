@@ -45,7 +45,7 @@
 ### Testing endpoint A
    Endpoint A tells us whether or not the two words sent in the body areanagrams. So in order to test it:
 
-   - Create a new POST request to "localhost:8080/A"(LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/A"(ON HEROKU).
+   - Create a new POST request to "localhost:8080/A" (LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/A" (ON HEROKU).
    - Click on "body" and select "JSON" from the dropdown menu.
    - Add to the body two words with keys "string1" and "string2" as shown below and click "Send".
    - You can check the outcome in the body of the response.
@@ -57,7 +57,7 @@
 ### Testing endpoint B
   Endpoint B identifies and returns all unique single word anagrams of string1 in string2. So in order to test it:
 
-   - Create a new POST request to "localhost:8080/B"(LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/B"(ON HEROKU).
+   - Create a new POST request to "localhost:8080/B" (LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/B" (ON HEROKU).
    - Click on "body" and select "JSON" from the dropdown menu.
    - Add to the body two one word and one sentence with keys "string1" and "string2" as shown below and click "Send".
    - You can check the outcome in the body of the response.
@@ -68,7 +68,7 @@
 ### Testing endpoint C
   Endpoint C identifies and returns all anagram groups present in the string1. So in order to test it:
 
-   - Create a new POST request to "localhost:8080/B"(LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/B"(ON HEROKU)
+   - Create a new POST request to "localhost:8080/B" (LOCALY) or "https://technical-assignment-anagrams.herokuapp.com/B" (ON HEROKU).
    - Click on "body" and select "JSON" from the dropdown menu.
    - Add to the body one sentence with key "string1" as shown below and click "Send".
    - You can check the outcome in the body of the response.
