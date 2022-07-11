@@ -1,6 +1,8 @@
 # Technical-Assignment
 
 ## How to run the project locally 
+  First clone the repository.
+  
   This project requires Node.js so you can download and istall it from [here](https://nodejs.org/en/download/).
   
   Open a terminal and make sure the installation was done correctly by typing:
