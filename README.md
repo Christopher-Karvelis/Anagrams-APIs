@@ -1,7 +1,13 @@
 # Technical-Assignment
 
 ## How to run the project locally 
-  First clone the repository.
+  ### First clone the repository:
+    - Above the list of files, click on "Code" button.
+    - Copy the URL for the repository.
+    - Open Git Bash.
+    - Change the current working directory to the location where you want the cloned directory.
+    - Type git clone, and then paste the URL you copied earlier.
+
   
   This project requires Node.js so you can download and istall it from [here](https://nodejs.org/en/download/).
   
