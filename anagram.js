@@ -82,6 +82,7 @@ class Anagram {
         const groupAnagrams = [];
         const groupsMap = new Map();                               // HashMap<key: ascii array of angram groups, value: array of anagrams>
         let words = this.getWordsArray(sentence);                  // Break the string in to an array of words
+        const uniqueAnagrams = new Set();
         for (let i = 0; i < words.length; i++) {
             const chars26 = new Array(26).fill(0);                 // Create asccii array as a unique identifier of anagram groups
             for (let j = 0; j < words[i].length; j++) {           
@@ -94,21 +95,24 @@ class Anagram {
             if (groupsMap.has(groupKey)) {               
                 wordsArray = groupsMap.get(groupKey);              // Update the anagrams group if groupKey already exist
             }
-            wordsArray.push(words[i]);
+            if (!uniqueAnagrams.has(words[i])) { 
+                uniqueAnagrams.add(words[i]);
+                wordsArray.push(words[i]);
+            }
             groupsMap.set(groupKey, wordsArray);
         }
         groupsMap.forEach((wordsArray, key) => {                   // Iterate through the HashMap to build the groups
            if (wordsArray.length >= 2) { 
                 const uniqueAnagrams = new Set();
-                const group = [];
-                console.log(wordsArray.toString());
-                wordsArray.forEach((word) => {
-                    if (!uniqueAnagrams.has(word)) {               // Check for uniqueness of the anagram
-                        uniqueAnagrams.add(word);
-                        group.push(word);
-                    }
-                });
-                groupAnagrams.push(group);
+                // const group = [];
+                // console.log(wordsArray.toString());
+                // wordsArray.forEach((word) => {
+                //     if (!uniqueAnagrams.has(word)) {               // Check for uniqueness of the anagram
+                //         uniqueAnagrams.add(word);
+                //         group.push(word);
+                //     }
+                // });
+                groupAnagrams.push(wordsArray);
            } 
         });
         return groupAnagrams;
